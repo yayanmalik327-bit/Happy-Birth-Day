@@ -1,0 +1,140 @@
+:root {
+  --bg1:#0f1020; --bg2:#11142a; --bg3:#0b0d1a;
+  --primary:#ffd166; --accent:#88e0ef; --rose:#ff7eb6;
+  --mint:#b8f2e6; --text:#e7e9f0;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(1200px 600px at 10% 10%, #1b1f43 0%, transparent 60%),
+              radial-gradient(900px 500px at 90% 20%, #2b2246 0%, transparent 60%),
+              radial-gradient(700px 500px at 50% 110%, #18203a 0%, transparent 60%),
+              linear-gradient(120deg,var(--bg1),var(--bg2),var(--bg3));
+  background-size: 300% 300%;
+  animation: gradientShift 25s ease infinite;
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+@keyframes gradientShift {
+  0% {background-position:0% 50%}
+  50% {background-position:100% 50%}
+  100% {background-position:0% 50%}
+}
+
+/* Balloons */
+.balloon {
+  position: fixed;
+  bottom: -120px;
+  width: 32px; height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, var(--rose), #ffd1e3);
+  box-shadow: 0 10px 20px rgba(0,0,0,.25);
+  transform: translateX(-50%);
+  opacity: .85;
+  animation: float 20s ease-in infinite;
+}
+.balloon:nth-child(2){left:20%; animation-delay:2s;}
+.balloon:nth-child(3){left:60%; animation-delay:4s; background:linear-gradient(to bottom right,#ffd166,#fff2bf);}
+.balloon:nth-child(4){left:80%; animation-delay:6s; background:linear-gradient(to bottom right,#b8f2e6,#e6fff6);}
+@keyframes float {
+  0%{transform:translateY(0) rotate(0deg);}
+  50%{transform:translateY(-60vh) rotate(8deg);}
+  100%{transform:translateY(-120vh) rotate(-8deg);}
+}
+
+/* Stars */
+.stars::before, .stars::after {
+  content: "";
+  position: fixed; inset: -10%;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.3) 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 60% 20%, rgba(255,255,255,.25) 50%, transparent 51%),
+    radial-gradient(1.8px 1.8px at 80% 70%, rgba(255,255,255,.2) 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 30% 80%, rgba(255,255,255,.25) 50%, transparent 51%);
+  background-size: 400px 400px;
+  animation: slowDrift 120s linear infinite;
+}
+.stars::after {opacity: .5; animation-direction: reverse;}
+@keyframes slowDrift {0%{transform:translateY(0)}100%{transform:translateY(-400px)}}
+
+/* Layout */
+.container {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 24px;
+}
+
+.card {
+  background: rgba(255,255,255,.06);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 30px rgba(0,0,0,.4);
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  background: linear-gradient(180deg, #fff, var(--primary));
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 20px;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -6px; height: 10px;
+  background: radial-gradient(12px 8px at 20% 60%, var(--accent), transparent 60%),
+              radial-gradient(16px 10px at 60% 60%, var(--mint), transparent 60%),
+              radial-gradient(14px 9px at 100% 60%, var(--rose), transparent 60%);
+  filter: blur(8px);
+  opacity: .8;
+}
+
+.btn {
+  font-size: 1.2rem;
+  padding: 16px 28px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary), #ffe8a6);
+  color: #222;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+.hidden {
+  display: none;
+}
+
+.wish {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #f0f3ff;
+  animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
